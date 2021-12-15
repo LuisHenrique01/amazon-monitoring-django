@@ -1,0 +1,1 @@
+web: gunicorn amazon_monitoring.wsgi
