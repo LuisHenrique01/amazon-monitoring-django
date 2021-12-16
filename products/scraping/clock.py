@@ -17,3 +17,6 @@ def update_historic():
         prices_day.append(HistoricModel(product=product,
                                         price=price_day))
     HistoricModel.objects.bulk_create(prices_day)
+
+
+sched.start()
