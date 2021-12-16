@@ -1,22 +1,16 @@
-from datetime import date
-
 from apscheduler.schedulers.blocking import BlockingScheduler
-from products.models import HistoricModel, ProductModel
-from products.scrap import get_price
+from products.clock import update_historic
+import django
 
+django.setup()
 sched = BlockingScheduler()
 
 
 @sched.scheduled_job('cron', day_of_week='mon-sun', hour=7)
-def update_historic():
-    today = date.today()
-    products = ProductModel.objects.exclude(historic_product__date=today)
-    prices_day = []
-    for product in products:
-        price_day = get_price(product.asin)
-        prices_day.append(HistoricModel(product=product,
-                                        price=price_day))
-    HistoricModel.objects.bulk_create(prices_day)
+def update_historic_cron():
+    print('----STARTING PRICE CHECK----')
+    update_historic()
+    print('----FINISHING PRICE CHECK----')
 
 
 sched.start()
