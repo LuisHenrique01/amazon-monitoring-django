@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from products.api.serializers import ProductHistoricSerializer, ProductSerializer, UserCreateSerializer
 from products.models import ProductModel
-from products.scraping.scrap import get_asin, get_name
+from products.scrap import get_asin, get_name
 
 
 class UserCreateView(generics.CreateAPIView):

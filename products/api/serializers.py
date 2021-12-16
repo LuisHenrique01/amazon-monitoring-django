@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
 from products.models import HistoricModel, ProductModel
-from products.scraping.scrap import get_price
+from products.scrap import get_price
 
 
 class UserCreateSerializer(serializers.ModelSerializer):

@@ -1,10 +1,16 @@
 import re
+import os
 import requests
 from bs4 import BeautifulSoup as bs
-from . import HEADERS, BASE_URL, RE_ASIN, RE_PRICE
+
+HEADERS = {"User-Agent": os.environ.get('USER_AGENT')}
+BASE_URL = os.environ.get('BASE_URL')
+RE_ASIN = os.environ.get('RE_ASIN')
+RE_PRICE = os.environ.get('RE_PRICE')
 
 
 def get_name(url: str) -> str:
+
     response = requests.get(url, headers=HEADERS)
     soup = bs(response.content, 'html.parser')
     soup = bs(soup.prettify(), 'html.parser')

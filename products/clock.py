@@ -2,7 +2,7 @@ from datetime import date
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from products.models import HistoricModel, ProductModel
-from products.scraping.scrap import get_price
+from products.scrap import get_price
 
 sched = BlockingScheduler()
 
