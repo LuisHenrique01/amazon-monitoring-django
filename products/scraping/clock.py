@@ -7,7 +7,7 @@ from products.scraping.scrap import get_price
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=17)
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=7)
 def update_historic():
     today = date.today()
     products = ProductModel.objects.exclude(historic_product__date=today)
