@@ -40,3 +40,7 @@ def get_price(asin: str) -> float:
     else:
         price = price.replace(',', '').replace('.', '')
     return float(price)
+
+
+def get_short_url(url: str) -> str:
+    return url.split('?')[0]
