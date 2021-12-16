@@ -1,8 +1,9 @@
+import django
+django.setup()
+
 from apscheduler.schedulers.blocking import BlockingScheduler
 from products.clock import update_historic
-import django
 
-django.setup()
 sched = BlockingScheduler()
 
 
