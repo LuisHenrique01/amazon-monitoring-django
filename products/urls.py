@@ -5,5 +5,5 @@ from products.api.viewsets import ProductHistoricView, ProductView, UserCreateVi
 urlpatterns = [
     path('user/', UserCreateView.as_view()),
     path('product/', ProductView.as_view()),
-    path('product-historic/', ProductHistoricView.as_view())
+    path('product-historic/<uuid:pk>/', ProductHistoricView.as_view())
 ]
