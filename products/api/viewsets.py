@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from products.api.serializers import ProductHistoricSerializer, ProductSerializer, UserCreateSerializer
 from products.models import ProductModel
-from products.scrap import get_asin, get_name
+from products.scrap import get_asin, get_name, get_short_url
 
 
 class UserCreateView(generics.CreateAPIView):
@@ -33,9 +33,10 @@ class ProductView(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         url = request.data['url']
-        data = {'user': request.user.id,
+        data = {'user': [request.user],
                 'name': get_name(url),
-                'asin': get_asin(url)}
+                'asin': get_asin(url),
+                'url': get_short_url(url)}
 
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)

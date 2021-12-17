@@ -10,7 +10,6 @@ RE_PRICE = os.environ.get('RE_PRICE')
 
 
 def get_name(url: str) -> str:
-
     response = requests.get(url, headers=HEADERS)
     soup = bs(response.content, 'html.parser')
     soup = bs(soup.prettify(), 'html.parser')
@@ -40,3 +39,7 @@ def get_price(asin: str) -> float:
     else:
         price = price.replace(',', '').replace('.', '')
     return float(price)
+
+
+def get_short_url(url: str) -> str:
+    return url.split('?')[0]

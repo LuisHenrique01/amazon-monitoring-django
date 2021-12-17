@@ -16,6 +16,7 @@ class ProductModel(UUIDModel):
     user = models.ManyToManyField(User, related_name='products_user')
     name = models.CharField(max_length=230)
     asin = models.CharField(max_length=10)
+    url = models.URLField(max_length=300, default='https://www.amazon.com.br/')
 
     class Meta:
         verbose_name = "Product"
