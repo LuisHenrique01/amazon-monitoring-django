@@ -3,8 +3,9 @@ import os
 import requests
 from bs4 import BeautifulSoup as bs
 
-HEADERS = {"User-Agent": os.environ.get('USER_AGENT')}
 BASE_URL = os.environ.get('BASE_URL')
+HEADERS = {"User-Agent": os.environ.get('USER_AGENT'),
+           "Origin": BASE_URL}
 RE_ASIN = os.environ.get('RE_ASIN')
 RE_PRICE = os.environ.get('RE_PRICE')
 
@@ -14,7 +15,7 @@ def get_name(url: str) -> str:
     soup = bs(response.content, 'html.parser')
     soup = bs(soup.prettify(), 'html.parser')
     title = soup.find('span', id='productTitle')
-    return title.text
+    return title.text.strip()
 
 
 def get_asin(url: str) -> str:
