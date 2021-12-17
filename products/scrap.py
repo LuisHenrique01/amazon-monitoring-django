@@ -10,7 +10,6 @@ RE_PRICE = os.environ.get('RE_PRICE')
 
 
 def get_name(url: str) -> str:
-
     response = requests.get(url, headers=HEADERS)
     soup = bs(response.content, 'html.parser')
     soup = bs(soup.prettify(), 'html.parser')

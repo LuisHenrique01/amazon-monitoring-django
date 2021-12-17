@@ -33,7 +33,7 @@ class ProductView(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         url = request.data['url']
-        data = {'user': request.user.id,
+        data = {'user': [request.user],
                 'name': get_name(url),
                 'asin': get_asin(url),
                 'url': get_short_url(url)}

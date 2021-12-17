@@ -28,7 +28,7 @@ class ProductSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         try:
             product = ProductModel.objects.get(asin=validated_data['asin'])
-            user = User.objects.get(id=validated_data['user'])
+            user = validated_data['user']
             product.user.add(user)
         except ObjectDoesNotExist:
             product = ProductModel.objects.create(**validated_data)
