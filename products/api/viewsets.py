@@ -33,12 +33,20 @@ class ProductView(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         url = request.data['url']
-        data = {'user': [{'id': request.user.id,
-                          'email': request.user.email,
-                          'first_name': request.user.first_name}],
-                'name': get_name(url),
-                'asin': get_asin(url),
-                'url': get_short_url(url)}
+        asin = get_asin(url)
+
+        try:
+            product = ProductModel.objects.get(asin=asin)
+            name = product.name
+            short_url = product.url
+        except ProductModel.DoesNotExist:
+            name = get_name(url)
+            short_url = get_short_url(url)
+
+        data = {'user': [request.user.id],
+                'name': name,
+                'asin': asin,
+                'url': short_url}
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)

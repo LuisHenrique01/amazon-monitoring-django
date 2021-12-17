@@ -27,7 +27,6 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    user = UserDetailSerializer(many=True)
 
     class Meta:
         model = ProductModel
@@ -37,12 +36,12 @@ class ProductSerializer(serializers.ModelSerializer):
         try:
             product = ProductModel.objects.get(asin=validated_data['asin'])
             user = validated_data['user']
-            product.user.add(user)
-        except ObjectDoesNotExist:
+            product.user.add(user[0].id)
+        except ProductModel.DoesNotExist:
             user = validated_data.pop('user')
             product = ProductModel(**validated_data)
             product.save()
-            product.user.add(user)
+            product.user.add(user[0].id)
             _ = HistoricModel.objects.create(
                 product=product, price=get_price(product.asin))
         finally:
