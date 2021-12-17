@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'django_filters',
+    'django_crontab',
     'products',
 ]
 
@@ -50,6 +51,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication'],
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated']
 }
+
+CRONJOBS = [
+    ('0 7 * * *', 'products.cron.update_historic')
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
