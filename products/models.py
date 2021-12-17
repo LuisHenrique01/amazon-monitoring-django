@@ -39,4 +39,4 @@ class HistoricModel(UUIDModel):
         ordering = ['-date']
 
     def __str__(self):
-        return self.name
+        return self.product.name
